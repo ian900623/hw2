@@ -7,11 +7,10 @@ DigitalIn pin_up(D5);
 DigitalIn pin_down(D3);
 DigitalIn pin_sel(D10);
 AnalogOut sig(PA_4);
+AnalogIn cat(PC_5);
 
 int main()
 {
-    //char choose = 1;
-    //char run = 1;
     int freq = 360;
     float T = 1000 / freq;
     int j = 1;
@@ -48,7 +47,7 @@ int main()
         if (store == 1) {
             ADCdata[j - 1] = sig;
             if (j == 100) {
-                printf("%d\r\n", freq);
+                // printf("%d\r\n", freq);
                 for(int k = 0; k < 100; k++) {
                     printf("%lf\r\n", ADCdata[k]);
                 }
