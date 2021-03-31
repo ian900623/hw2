@@ -4,8 +4,7 @@ import serial
 import time
 
 
-
-Fs = 100;  # sampling rate
+Fs = 500;  # sampling rate
 Ts = 1.0/Fs; # sampling interval
 t = np.arange(0,1,Ts) # time vector; create Fs samples between 0 and 1.0 sec.
 y = np.arange(0,1,Ts) # signal vector; create Fs samples
@@ -18,7 +17,6 @@ frq = frq[range(int(n/2))] # one side frequency range
 
 serdev = '/dev/ttyACM0'
 s = serial.Serial(serdev)
-freq = float(s.readline())
 for x in range(0, int(Fs)):
     line=s.readline() # Read an echo string from B_L4S5I_IOT01A terminated with '\n'
     # print line
