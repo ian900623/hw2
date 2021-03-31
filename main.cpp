@@ -11,11 +11,12 @@ AnalogIn cat(PC_5);
 
 int main()
 {
+    int while_add = 0;
     int freq = 360;
     float T = 1000 / freq;
     int j = 1;
     float i = 0.0f;
-    float ADCdata[100];
+    float ADCdata[500];
     char store = 0;
 
     uLCD.printf("\nPlease Select the Frequency\n");
@@ -43,18 +44,22 @@ int main()
         if (i <= 30) sig = i / 30.0f / 1.1f;
         if (i > 30) sig = (100 - i) / 70.0f / 1.1f;
         if (i > 100) i = 0.0f;
-        wait_us(T * 10 - 13);  
+        wait_us(T * 10 - 13);
+        
         if (store == 1) {
-            ADCdata[j - 1] = sig;
-            if (j == 100) {
-                // printf("%d\r\n", freq);
-                for(int k = 0; k < 100; k++) {
+            while_add++;
+            if (j == 500) {
+               for(int k = 0; k < 500; k++) {
                     printf("%lf\r\n", ADCdata[k]);
                 }
                 j = 1;
                 store = 0;
-            }
-            else j++;
+                while_add = 0;
+            }  
+            else if (while_add % (100 * freq / 500) == 0) {
+               ADCdata[j - 1] = cat;
+               j++;
+            }         
         }
         i++;
     }
